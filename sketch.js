@@ -2,7 +2,6 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
-var gameState = "play";
 var engine,
   world,
   backgroundImg,
@@ -83,9 +82,8 @@ function draw() {
 
   Engine.update(engine);
   ground.display();
-  if(gameState === "play"){
+
   showBoats();
-  }
 
   for (var i = 0; i < balls.length; i++) {
     showCannonBalls(balls[i], i);
@@ -111,23 +109,19 @@ function draw() {
   cannon.display();
   tower.display();
 
-  fill("blue");
-  strokeWeight(5);
-  stroke("lightblue");
+  fill("#6d4c41");
   textSize(40);
-  text(`Score: ${score}`, width - 200, 50);
+  text(`Score:${score}`, width - 200, 50);
   textAlign(CENTER, CENTER);
 }
 
 function keyPressed() {
-  if(gameState === "play"){
   if (keyCode === DOWN_ARROW) {
     var cannonBall = new CannonBall(cannon.x, cannon.y);
     cannonBall.trajectory = [];
     Matter.Body.setAngle(cannonBall.body, cannon.angle);
     balls.push(cannonBall);
   }
-}
 }
 
 function showCannonBalls(ball, index) {
@@ -201,7 +195,6 @@ function keyReleased() {
 }
 
 function gameOver() {
-  gameState = "end";
   swal(
     {
       title: `Game Over!!!`,
