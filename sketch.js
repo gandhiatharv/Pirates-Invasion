@@ -152,7 +152,7 @@ function showBoats() {
       var positions = [-40, -60, -70, -20];
       var position = random(positions);
       var boat = new Boat(
-        width,
+        random(width/1.3, width),
         height - 100,
         170,
         170,
